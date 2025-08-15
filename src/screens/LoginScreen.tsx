@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export function LoginScreen({ navigation }: any) {
   return (
-    <View style={styles.wrapper}>
-      <LinearGradient colors={['#2230C3', '#000000']} style={styles.frame}>
+    <LinearGradient colors={['#2230C3', '#000000']} style={styles.container}>
         <Text style={[styles.label, styles.emailLabel]}>Informe seu e-mail</Text>
         <TextInput
           style={[styles.input, styles.emailInput]}
@@ -40,23 +39,20 @@ export function LoginScreen({ navigation }: any) {
         >
           <Text style={styles.buttonText}>Criar Cadastro</Text>
         </TouchableOpacity>
-      </LinearGradient>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0a0a0a',
-  },
-  frame: {
-    width: 412,
-    height: 917,
     position: 'relative',
     overflow: 'hidden',
+    backgroundColor: '#0a0a0a',
+    width: '100%',
+    height: '100%',
     borderRadius: 16,
   },
   label: {
