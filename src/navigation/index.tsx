@@ -83,7 +83,7 @@ function AppTabs() {
 export function Navigation({ theme, linking, onReady }: { theme: Theme; linking?: any; onReady?: () => void }) {
   return (
     <NavigationContainer theme={theme} linking={linking} onReady={onReady}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="AppTabs" component={AppTabs} />

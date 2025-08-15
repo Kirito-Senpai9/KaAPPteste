@@ -29,7 +29,7 @@ export function RegisterScreen({ navigation }: any) {
         <Text style={styles.mainButtonText}>Criar Conta</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={styles.link}>Fazer Login</Text>
       </TouchableOpacity>
     </LinearGradient>
