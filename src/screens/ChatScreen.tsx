@@ -6,23 +6,32 @@ import { FontAwesome } from '@expo/vector-icons';
 export function ChatScreen() {
   return (
     <View style={styles.container}>
+      {/* Cabeçalho do chat */}
       <View style={styles.header}>
         <Text style={styles.title}>Chat Geral</Text>
         <FontAwesome name="cog" size={24} color={colors.textPrimary} />
       </View>
+
+      {/* Mensagens do chat */}
       <FlatList
         data={[1,2,3]}
         keyExtractor={(item) => item.toString()}
         renderItem={() => <Text style={styles.message}>Mensagem</Text>}
         contentContainerStyle={{ padding: spacing.padding }}
       />
+
+      {/* Área de inserção de mensagem */}
       <View style={styles.inputRow}>
         <FontAwesome name="paperclip" size={24} color={colors.textPrimary} />
         <FontAwesome name="image" size={24} color={colors.textPrimary} style={{ marginLeft: 10 }} />
         <FontAwesome name="smile-o" size={24} color={colors.textPrimary} style={{ marginLeft: 10 }} />
-        <TextInput style={styles.input} placeholder="Mensagem" placeholderTextColor="rgba(255,255,255,0.7)" />
+        <TextInput
+          style={styles.input}
+          placeholder="Mensagem"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+        />
         <TouchableOpacity>
-          <FontAwesome name="send" size={24} color={colors.textPrimary} />
+          <FontAwesome name="send" size={24} color={colors.accent} />
         </TouchableOpacity>
       </View>
     </View>
@@ -32,7 +41,7 @@ export function ChatScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2F2F2F',
+    backgroundColor: colors.background,
   },
   header: {
     height: 60,
@@ -40,7 +49,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.padding,
-    backgroundColor: '#2F2F2F',
+    backgroundColor: colors.card,
   },
   title: {
     color: colors.textPrimary,

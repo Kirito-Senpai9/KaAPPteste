@@ -1,12 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing } from '../styles';
 
 export function CommunityScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <View style={styles.banner}>
-        <Text style={styles.bannerText}>Knights of the Blood</Text>
+        {/* Cabeçalho da comunidade com ícone */}
+        <View style={styles.bannerRow}>
+          <Ionicons name="people" size={24} color={colors.accent} />
+          <Text style={styles.bannerText}>Knights of the Blood</Text>
+        </View>
         <Text style={styles.status}>● 143 Online</Text>
       </View>
       <FlatList
@@ -33,6 +38,11 @@ const styles = StyleSheet.create({
   banner: {
     padding: spacing.padding,
     backgroundColor: colors.card,
+  },
+  bannerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   bannerText: {
     color: colors.textPrimary,
