@@ -1,134 +1,140 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+  useWindowDimensions,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export function LoginScreen({ navigation }: any) {
+  const { width } = useWindowDimensions();
+
   return (
-    <View style={styles.wrapper}>
-      <LinearGradient colors={['#2230C3', '#000000']} style={styles.container}>
-      <Text style={[styles.label, styles.emailLabel]}>Informe seu e-mail</Text>
-      <TextInput
-        style={[styles.input, styles.emailInput]}
-        keyboardType="email-address"
-      />
-
-      <Text style={[styles.label, styles.passwordLabel]}>informe sua senha</Text>
-      <TextInput
-        style={[styles.input, styles.passwordInput]}
-        secureTextEntry
-      />
-
-      <Image
-        source={{ uri: 'https://placehold.co/40x40' }}
-        style={[styles.icon, styles.googleIcon]}
-      />
-      <Image
-        source={{ uri: 'https://placehold.co/40x40' }}
-        style={[styles.icon, styles.facebookIcon]}
-      />
-
-      <TouchableOpacity
-        style={[styles.button, styles.loginButton]}
-        onPress={() => navigation.replace('AppTabs')}
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAvoidingView
+        style={styles.flex}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <Text style={styles.buttonText}>Fazer Login</Text>
-      </TouchableOpacity>
+        <LinearGradient colors={['#2230C3', '#000000']} style={styles.gradient}>
+          <View style={[styles.form, { paddingHorizontal: width * 0.1 }]}> 
+            <Text style={styles.label}>Informe seu e-mail</Text>
+            <TextInput
+              style={styles.input}
+              keyboardType="email-address"
+            />
 
-      <TouchableOpacity
-        style={[styles.button, styles.registerButton]}
-        onPress={() => navigation.navigate('Register')}
-      >
-        <Text style={styles.buttonText}>Criar Cadastro</Text>
-      </TouchableOpacity>
-      </LinearGradient>
-    </View>
+            <Text style={styles.label}>Informe sua senha</Text>
+            <TextInput
+              style={styles.input}
+              secureTextEntry
+            />
+
+            <View style={styles.socialRow}>
+              <Image
+                source={{ uri: 'https://placehold.co/40x40' }}
+                style={styles.icon}
+              />
+              <Image
+                source={{ uri: 'https://placehold.co/40x40' }}
+                style={styles.icon}
+              />
+            </View>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.replace('AppTabs')}
+            >
+              <Text style={styles.buttonText}>Fazer Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.button, styles.registerButton]}
+              onPress={() => navigation.navigate('Register')}
+            >
+              <Text style={styles.buttonText}>Criar Cadastro</Text>
+            </TouchableOpacity>
+          </View>
+        </LinearGradient>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  safeArea: {
     flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#0a0a0a',
   },
-  container: {
-    width: 412,
-    height: 917,
-    position: 'relative',
-    overflow: 'hidden',
-    borderRadius: 16,
+  flex: {
+    flex: 1,
+  },
+  gradient: {
+    flex: 1,
+  },
+  form: {
+    flex: 1,
+    justifyContent: 'center',
   },
   label: {
-    position: 'absolute',
     color: 'white',
     fontSize: 12,
     fontWeight: '700',
-    fontFamily: 'Noto Sans Malayalam UI',
-  },
-  emailLabel: {
-    left: 92,
-    top: 407,
-  },
-  passwordLabel: {
-    left: 92,
-    top: 491,
-    textTransform: 'none',
+    fontFamily: Platform.select({
+      default: 'Noto Sans Malayalam UI',
+      ios: 'Noto Sans Malayalam UI',
+      android: 'Noto Sans Malayalam UI',
+    }),
+    marginBottom: 8,
   },
   input: {
-    position: 'absolute',
-    width: 228,
     height: 47,
-    backgroundColor: 'rgba(217,217,217,0.50)',
+    backgroundColor: 'rgba(217,217,217,0.5)',
     borderRadius: 7,
     borderWidth: 1,
     borderColor: 'rgba(0,0,0,0.15)',
     paddingHorizontal: 8,
     color: '#000',
+    marginBottom: 16,
   },
-  emailInput: {
-    left: 92,
-    top: 435,
-  },
-  passwordInput: {
-    left: 92,
-    top: 511,
+  socialRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 24,
   },
   icon: {
-    position: 'absolute',
     width: 40,
     height: 40,
-  },
-  googleIcon: {
-    left: 160,
-    top: 575,
-  },
-  facebookIcon: {
-    left: 206,
-    top: 575,
+    marginHorizontal: 8,
   },
   button: {
-    position: 'absolute',
-    width: 228,
-    height: 45,
     backgroundColor: '#D9D9D9',
     borderRadius: 24,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  loginButton: {
-    left: 88,
-    top: 631,
+    paddingVertical: 12,
+    marginBottom: 16,
   },
   registerButton: {
-    left: 88,
-    top: 692,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#D9D9D9',
   },
   buttonText: {
     color: '#000',
     fontSize: 12,
     fontWeight: '700',
-    fontFamily: 'Noto Sans Malayalam UI',
+    fontFamily: Platform.select({
+      default: 'Noto Sans Malayalam UI',
+      ios: 'Noto Sans Malayalam UI',
+      android: 'Noto Sans Malayalam UI',
+    }),
   },
 });
+
