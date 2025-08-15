@@ -2,23 +2,21 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { InputField } from '../components/InputField';
-import { SocialButton } from '../components/SocialButton';
-import { colors, radius } from '../styles';
+import { colors } from '../styles';
 
 export function LoginScreen({ navigation }: any) {
   return (
-    <LinearGradient colors={[colors.accent, colors.dark]} style={styles.container}>
-      {/* Campos de entrada de credenciais */}
-      <InputField placeholder="Informe seu e-mail" />
-      <InputField placeholder="Informe sua senha" secureTextEntry />
-
-      {/* Botões sociais */}
-      <View style={styles.socialRow}>
-        <SocialButton name="google" />
-        <SocialButton name="facebook" />
+    <LinearGradient colors={[ '#2230C3', '#000000' ]} style={styles.container}>
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Informe seu e-mail</Text>
+        <InputField placeholder="" keyboardType="email-address" />
       </View>
 
-      {/* Botão principal de login */}
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Informe sua senha</Text>
+        <InputField placeholder="" secureTextEntry />
+      </View>
+
       <TouchableOpacity
         style={styles.mainButton}
         onPress={() => navigation.replace('AppTabs')}
@@ -26,12 +24,8 @@ export function LoginScreen({ navigation }: any) {
         <Text style={styles.mainButtonText}>Fazer Login</Text>
       </TouchableOpacity>
 
-      {/* Navegação para a tela de cadastro */}
-      <TouchableOpacity
-        style={styles.mainButton}
-        onPress={() => navigation.navigate('Register')}
-      >
-        <Text style={styles.mainButtonText}>Criar Cadastro</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.link}>Criar Conta</Text>
       </TouchableOpacity>
     </LinearGradient>
   );
@@ -43,21 +37,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  socialRow: {
-    flexDirection: 'row',
-    marginVertical: 16,
+  inputGroup: {
+    width: '82%',
+    marginBottom: 16,
+  },
+  label: {
+    color: 'rgba(255,255,255,0.95)',
+    fontSize: 12,
+    marginBottom: 8,
   },
   mainButton: {
-    width: '84%',
-    height: 52,
-    borderRadius: radius.button,
-    backgroundColor: colors.accent,
+    width: 228,
+    height: 46,
+    borderRadius: 23,
+    backgroundColor: '#D9D9D9',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 12,
   },
   mainButtonText: {
+    color: '#000',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  link: {
+    marginTop: 16,
     color: colors.textPrimary,
-    fontWeight: 'bold',
+    fontSize: 12,
+    opacity: 0.9,
   },
 });
