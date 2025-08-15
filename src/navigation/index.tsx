@@ -1,105 +1,67 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HeaderButton, Text } from '@react-navigation/elements';
-import {
-  createStaticNavigation,
-  StaticParamList,
-} from '@react-navigation/native';
+import React from 'react';
+import { NavigationContainer, Theme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image } from 'react-native';
-import bell from '../assets/bell.png';
-import newspaper from '../assets/newspaper.png';
-import { Home } from './screens/Home';
-import { Profile } from './screens/Profile';
-import { Settings } from './screens/Settings';
-import { Updates } from './screens/Updates';
-import { NotFound } from './screens/NotFound';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome } from '@expo/vector-icons';
+import { colors } from '../styles';
+import { LoginScreen } from '../screens/LoginScreen';
+import { RegisterScreen } from '../screens/RegisterScreen';
+import { FeedScreen } from '../screens/FeedScreen';
+import { SearchScreen } from '../screens/SearchScreen';
+import { CreateScreen } from '../screens/CreateScreen';
+import { CommunityScreen } from '../screens/CommunityScreen';
+import { ProfileScreen } from '../screens/ProfileScreen';
+import { CommentsScreen } from '../screens/CommentsScreen';
+import { ChatScreen } from '../screens/ChatScreen';
 
-const HomeTabs = createBottomTabNavigator({
-  screens: {
-    Home: {
-      screen: Home,
-      options: {
-        title: 'Feed',
-        tabBarIcon: ({ color, size }) => (
-          <Image
-            source={newspaper}
-            tintColor={color}
-            style={{
-              width: size,
-              height: size,
-            }}
-          />
-        ),
-      },
-    },
-    Updates: {
-      screen: Updates,
-      options: {
-        tabBarIcon: ({ color, size }) => (
-          <Image
-            source={bell}
-            tintColor={color}
-            style={{
-              width: size,
-              height: size,
-            }}
-          />
-        ),
-      },
-    },
-  },
-});
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-const RootStack = createNativeStackNavigator({
-  screens: {
-    HomeTabs: {
-      screen: HomeTabs,
-      options: {
-        title: 'Home',
+function AppTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
         headerShown: false,
-      },
-    },
-    Profile: {
-      screen: Profile,
-      linking: {
-        path: ':user(@[a-zA-Z0-9-_]+)',
-        parse: {
-          user: (value) => value.replace(/^@/, ''),
+        tabBarStyle: {
+          backgroundColor: '#111111',
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
+          height: 64,
+          paddingBottom: 10,
         },
-        stringify: {
-          user: (value) => `@${value}`,
+        tabBarActiveTintColor: colors.accent,
+        tabBarInactiveTintColor: 'rgba(255,255,255,0.7)',
+        tabBarIcon: ({ color, size }) => {
+          const icons: any = {
+            Feed: 'home',
+            Search: 'search',
+            Create: 'plus-circle',
+            Community: 'users',
+            Profile: 'user',
+          };
+          return <FontAwesome name={icons[route.name]} size={size} color={color} />;
         },
-      },
-    },
-    Settings: {
-      screen: Settings,
-      options: ({ navigation }) => ({
-        presentation: 'modal',
-        headerRight: () => (
-          <HeaderButton onPress={navigation.goBack}>
-            <Text>Close</Text>
-          </HeaderButton>
-        ),
-      }),
-    },
-    NotFound: {
-      screen: NotFound,
-      options: {
-        title: '404',
-      },
-      linking: {
-        path: '*',
-      },
-    },
-  },
-});
+      })}
+    >
+      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Search" component={SearchScreen} />
+      <Tab.Screen name="Create" component={CreateScreen} />
+      <Tab.Screen name="Community" component={CommunityScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
 
-export const Navigation = createStaticNavigation(RootStack);
-
-type RootStackParamList = StaticParamList<typeof RootStack>;
-
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
+export function Navigation({ theme, linking, onReady }: { theme: Theme; linking?: any; onReady?: () => void }) {
+  return (
+    <NavigationContainer theme={theme} linking={linking} onReady={onReady}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="AppTabs" component={AppTabs} />
+        <Stack.Screen name="Comments" component={CommentsScreen} />
+        <Stack.Screen name="Chat" component={ChatScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
