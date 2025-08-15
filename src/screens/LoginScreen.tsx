@@ -2,21 +2,17 @@ import React from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   Image,
   StyleSheet,
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
-  useWindowDimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { InputField } from '../components/InputField';
 
 export function LoginScreen({ navigation }: any) {
-  const { width } = useWindowDimensions();
-  const fieldWidth = Math.min(228, width * 0.8);
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
@@ -25,17 +21,23 @@ export function LoginScreen({ navigation }: any) {
       >
         <LinearGradient colors={['#2230C3', '#000000']} style={styles.gradient}>
           <View style={styles.form}>
-            <Text style={styles.label}>Informe seu e-mail</Text>
-            <TextInput
-              style={[styles.input, { width: fieldWidth }]}
-              keyboardType="email-address"
-            />
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Informe seu e-mail</Text>
+              <InputField
+                placeholder=""
+                keyboardType="email-address"
+                style={styles.inputField}
+              />
+            </View>
 
-            <Text style={styles.label}>Informe sua senha</Text>
-            <TextInput
-              style={[styles.input, { width: fieldWidth }]}
-              secureTextEntry
-            />
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Informe sua senha</Text>
+              <InputField
+                placeholder=""
+                secureTextEntry
+                style={styles.inputField}
+              />
+            </View>
 
             <View style={styles.socialRow}>
               <Image
@@ -49,14 +51,14 @@ export function LoginScreen({ navigation }: any) {
             </View>
 
             <TouchableOpacity
-              style={[styles.button, { width: fieldWidth }]}
+              style={styles.button}
               onPress={() => navigation.replace('AppTabs')}
             >
               <Text style={styles.buttonText}>Fazer Login</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.button, { width: fieldWidth }]}
+              style={styles.button}
               onPress={() => navigation.navigate('Register')}
             >
               <Text style={styles.buttonText}>Criar Cadastro</Text>
@@ -84,26 +86,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  label: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: '700',
-    fontFamily: Platform.select({
-      default: 'Noto Sans Malayalam UI',
-      ios: 'Noto Sans Malayalam UI',
-      android: 'Noto Sans Malayalam UI',
-    }),
-    marginBottom: 8,
-  },
-  input: {
-    height: 47,
-    backgroundColor: 'rgba(217,217,217,0.5)',
-    borderRadius: 7,
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.15)',
-    paddingHorizontal: 8,
-    color: '#000',
+  inputGroup: {
+    width: 228,
     marginBottom: 16,
+  },
+  inputField: {
+    width: '100%',
+  },
+  label: {
+    color: 'rgba(255,255,255,0.95)',
+    fontSize: 12,
+    marginBottom: 8,
   },
   socialRow: {
     flexDirection: 'row',
@@ -122,6 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 12,
     marginBottom: 16,
+    width: 228,
   },
   buttonText: {
     color: '#000',
