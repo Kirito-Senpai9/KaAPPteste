@@ -9,12 +9,20 @@ export function RegisterScreen({ navigation }: any) {
     <LinearGradient colors={[ '#2230C3', '#000000' ]} style={styles.container}>
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Informe seu e-mail</Text>
-        <InputField placeholder="" keyboardType="email-address" />
+        <InputField
+          placeholder=""
+          keyboardType="email-address"
+          style={styles.inputField}
+        />
       </View>
 
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Crie sua senha</Text>
-        <InputField placeholder="" secureTextEntry />
+        <InputField
+          placeholder=""
+          secureTextEntry
+          style={styles.inputField}
+        />
       </View>
 
       <TouchableOpacity style={styles.mainButton}>
@@ -35,8 +43,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   inputGroup: {
-    width: '82%',
+    width: 228,
     marginBottom: 16,
+  },
+  inputField: {
+    width: '100%',
   },
   label: {
     color: 'rgba(255,255,255,0.95)',
