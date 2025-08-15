@@ -17,7 +17,7 @@ export function RegisterScreen({ navigation }: any) {
       </View>
 
       <View style={styles.inputGroup}>
-        <Text style={styles.label}>Crie sua senha</Text>
+        <Text style={styles.label}>Informe sua senha</Text>
         <InputField
           placeholder=""
           secureTextEntry
