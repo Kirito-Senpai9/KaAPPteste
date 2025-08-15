@@ -7,7 +7,8 @@ import { colors, radius } from '../styles';
 
 export function LoginScreen({ navigation }: any) {
   return (
-    <LinearGradient colors={['#2E39E9', '#020013']} style={styles.container}>
+    <LinearGradient colors={['#4E54C8', '#8F94FB']} style={styles.container}>
+      <Text style={styles.title}>Bem-vindo</Text>
       <InputField placeholder="Informe seu e-mail" />
       <InputField placeholder="Informe sua senha" secureTextEntry />
       <View style={styles.socialRow}>
@@ -18,13 +19,27 @@ export function LoginScreen({ navigation }: any) {
         style={styles.mainButton}
         onPress={() => navigation.replace('AppTabs')}
       >
-        <Text style={styles.mainButtonText}>Fazer Login</Text>
+        <LinearGradient
+          colors={[colors.neon, colors.accent]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.mainButtonGradient}
+        >
+          <Text style={styles.mainButtonText}>Fazer Login</Text>
+        </LinearGradient>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.mainButton}
         onPress={() => navigation.navigate('Register')}
       >
-        <Text style={styles.mainButtonText}>Criar Cadastro</Text>
+        <LinearGradient
+          colors={[colors.accent, colors.neon]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.mainButtonGradient}
+        >
+          <Text style={styles.mainButtonText}>Criar Cadastro</Text>
+        </LinearGradient>
       </TouchableOpacity>
     </LinearGradient>
   );
@@ -36,6 +51,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  title: {
+    fontSize: 32,
+    color: colors.textPrimary,
+    fontWeight: 'bold',
+    marginBottom: 24,
+  },
   socialRow: {
     flexDirection: 'row',
     marginVertical: 16,
@@ -44,13 +65,21 @@ const styles = StyleSheet.create({
     width: '84%',
     height: 52,
     borderRadius: radius.button,
-    backgroundColor: colors.lightButton,
+    marginTop: 12,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  mainButtonGradient: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 12,
   },
   mainButtonText: {
-    color: '#111111',
+    color: colors.textPrimary,
     fontWeight: 'bold',
   },
 });

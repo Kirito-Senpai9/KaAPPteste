@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { PostCard } from '../components/PostCard';
 import { colors } from '../styles';
 
@@ -15,7 +16,7 @@ export function FeedScreen({ navigation }: any) {
   );
 
   return (
-    <View style={styles.container}>
+    <LinearGradient colors={[colors.background, colors.dark]} style={styles.container}>
       <FlatList
         data={[1, 2, 3]}
         keyExtractor={(item) => item.toString()}
@@ -32,14 +33,13 @@ export function FeedScreen({ navigation }: any) {
         }
         contentContainerStyle={{ paddingBottom: 80 }}
       />
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
     paddingHorizontal: 0,
   },
   stories: {
