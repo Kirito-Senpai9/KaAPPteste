@@ -15,6 +15,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export function LoginScreen({ navigation }: any) {
   const { width } = useWindowDimensions();
+  const fieldWidth = Math.min(228, width * 0.8);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -23,16 +24,16 @@ export function LoginScreen({ navigation }: any) {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <LinearGradient colors={['#2230C3', '#000000']} style={styles.gradient}>
-          <View style={[styles.form, { paddingHorizontal: width * 0.1 }]}> 
+          <View style={styles.form}>
             <Text style={styles.label}>Informe seu e-mail</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { width: fieldWidth }]}
               keyboardType="email-address"
             />
 
             <Text style={styles.label}>Informe sua senha</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { width: fieldWidth }]}
               secureTextEntry
             />
 
@@ -48,14 +49,14 @@ export function LoginScreen({ navigation }: any) {
             </View>
 
             <TouchableOpacity
-              style={styles.button}
+              style={[styles.button, { width: fieldWidth }]}
               onPress={() => navigation.replace('AppTabs')}
             >
               <Text style={styles.buttonText}>Fazer Login</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.button, styles.registerButton]}
+              style={[styles.button, { width: fieldWidth }]}
               onPress={() => navigation.navigate('Register')}
             >
               <Text style={styles.buttonText}>Criar Cadastro</Text>
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   label: {
     color: 'white',
@@ -120,11 +122,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 12,
     marginBottom: 16,
-  },
-  registerButton: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#D9D9D9',
   },
   buttonText: {
     color: '#000',
