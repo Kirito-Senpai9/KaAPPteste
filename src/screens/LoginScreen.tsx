@@ -119,13 +119,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#000',
-    fontSize: 12,
-    fontWeight: '700',
-    fontFamily: Platform.select({
-      default: 'Noto Sans Malayalam UI',
-      ios: 'Noto Sans Malayalam UI',
-      android: 'Noto Sans Malayalam UI',
-    }),
+    fontSize: 14,
+    fontWeight: '500',
   },
 });
 
