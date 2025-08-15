@@ -1,70 +1,62 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export function LoginScreen({ navigation }: any) {
   return (
-    <View style={styles.wrapper}>
-      <LinearGradient colors={['#2230C3', '#000000']} style={styles.container}>
-        <Text style={[styles.label, styles.emailLabel]}>Informe seu e-mail</Text>
-        <TextInput
-          style={[styles.input, styles.emailInput]}
-          keyboardType="email-address"
-        />
+    <LinearGradient colors={['#2230C3', '#000000']} style={styles.container}>
+      <Text style={[styles.label, styles.emailLabel]}>Informe seu e-mail</Text>
+      <TextInput
+        style={[styles.input, styles.emailInput]}
+        keyboardType="email-address"
+      />
 
-        <Text style={[styles.label, styles.passwordLabel]}>informe sua senha</Text>
-        <TextInput
-          style={[styles.input, styles.passwordInput]}
-          secureTextEntry
-        />
+      <Text style={[styles.label, styles.passwordLabel]}>informe sua senha</Text>
+      <TextInput
+        style={[styles.input, styles.passwordInput]}
+        secureTextEntry
+      />
 
-        <Image
-          source={{ uri: 'https://placehold.co/40x40' }}
-          style={[styles.icon, styles.googleIcon]}
-        />
-        <Image
-          source={{ uri: 'https://placehold.co/40x40' }}
-          style={[styles.icon, styles.facebookIcon]}
-        />
+      <Image
+        source={{ uri: 'https://placehold.co/40x40' }}
+        style={[styles.icon, styles.googleIcon]}
+      />
+      <Image
+        source={{ uri: 'https://placehold.co/40x40' }}
+        style={[styles.icon, styles.facebookIcon]}
+      />
 
-        <TouchableOpacity
-          style={[styles.button, styles.loginButton]}
-          onPress={() => navigation.replace('AppTabs')}
-        >
-          <Text style={styles.buttonText}>Fazer Login</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.button, styles.loginButton]}
+        onPress={() => navigation.replace('AppTabs')}
+      >
+        <Text style={styles.buttonText}>Fazer Login</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.button, styles.registerButton]}
-          onPress={() => navigation.navigate('Register')}
-        >
-          <Text style={styles.buttonText}>Criar Cadastro</Text>
-        </TouchableOpacity>
-      </LinearGradient>
-    </View>
+      <TouchableOpacity
+        style={[styles.button, styles.registerButton]}
+        onPress={() => navigation.navigate('Register')}
+      >
+        <Text style={styles.buttonText}>Criar Cadastro</Text>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     flex: 1,
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#0a0a0a',
-  },
-  container: {
-    width: 412,
-    height: 917,
+    height: '100%',
     position: 'relative',
     overflow: 'hidden',
-    borderRadius: 16,
   },
   label: {
     position: 'absolute',
     color: 'white',
     fontSize: 12,
     fontWeight: '700',
+    fontFamily: 'Noto Sans Malayalam UI',
   },
   emailLabel: {
     left: 92,
@@ -128,5 +120,6 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 12,
     fontWeight: '700',
+    fontFamily: 'Noto Sans Malayalam UI',
   },
 });
