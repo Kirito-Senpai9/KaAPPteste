@@ -2,7 +2,8 @@ import React from 'react';
 import { NavigationContainer, Theme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { Animated } from 'react-native';
 import { colors } from '../styles';
 import { LoginScreen } from '../screens/LoginScreen';
 import { RegisterScreen } from '../screens/RegisterScreen';
@@ -17,11 +18,29 @@ import { ChatScreen } from '../screens/ChatScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const AnimatedIcon = ({ name, color, size, focused }: { name: any; color: string; size: number; focused: boolean }) => {
+  const scale = React.useRef(new Animated.Value(1)).current;
+
+  React.useEffect(() => {
+    Animated.spring(scale, {
+      toValue: focused ? 1.2 : 1,
+      useNativeDriver: true,
+    }).start();
+  }, [focused]);
+
+  return (
+    <Animated.View style={{ transform: [{ scale }] }}>
+      <Ionicons name={name} size={size} color={color} />
+    </Animated.View>
+  );
+};
+
 function AppTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
+        animation: 'fade',
         tabBarStyle: {
           backgroundColor: '#111111',
           borderTopLeftRadius: 24,
@@ -31,15 +50,15 @@ function AppTabs() {
         },
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: 'rgba(255,255,255,0.7)',
-        tabBarIcon: ({ color, size }) => {
+        tabBarIcon: ({ color, size, focused }) => {
           const icons: any = {
-            Feed: 'home',
-            Search: 'search',
-            Create: 'plus-circle',
-            Community: 'users',
-            Profile: 'user',
+            Feed: focused ? 'home' : 'home-outline',
+            Search: focused ? 'search' : 'search-outline',
+            Create: focused ? 'add-circle' : 'add-circle-outline',
+            Community: focused ? 'people' : 'people-outline',
+            Profile: focused ? 'person' : 'person-outline',
           };
-          return <FontAwesome name={icons[route.name]} size={size} color={color} />;
+          return <AnimatedIcon name={icons[route.name]} size={size} color={color} focused={focused} />;
         },
       })}
     >
