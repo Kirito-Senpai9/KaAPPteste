@@ -2,21 +2,25 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { InputField } from '../components/InputField';
-import { colors, radius } from '../styles';
+import { colors } from '../styles';
 
 export function RegisterScreen({ navigation }: any) {
   return (
-    <LinearGradient colors={[colors.accent, colors.dark]} style={styles.container}>
-      {/* Campos de cadastro do usuário */}
-      <InputField placeholder="Informe seu e-mail" />
-      <InputField placeholder="Crie sua senha" secureTextEntry />
+    <LinearGradient colors={[ '#2230C3', '#000000' ]} style={styles.container}>
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Informe seu e-mail</Text>
+        <InputField placeholder="" keyboardType="email-address" />
+      </View>
 
-      {/* Botão principal de criação de conta */}
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Crie sua senha</Text>
+        <InputField placeholder="" secureTextEntry />
+      </View>
+
       <TouchableOpacity style={styles.mainButton}>
         <Text style={styles.mainButtonText}>Criar Conta</Text>
       </TouchableOpacity>
 
-      {/* Voltar para a tela de login */}
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text style={styles.link}>Fazer Login</Text>
       </TouchableOpacity>
@@ -30,21 +34,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  inputGroup: {
+    width: '82%',
+    marginBottom: 16,
+  },
+  label: {
+    color: 'rgba(255,255,255,0.95)',
+    fontSize: 12,
+    marginBottom: 8,
+  },
   mainButton: {
-    width: '84%',
-    height: 52,
-    borderRadius: radius.button,
-    backgroundColor: colors.accent,
+    width: 228,
+    height: 46,
+    borderRadius: 23,
+    backgroundColor: '#D9D9D9',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 12,
   },
   mainButtonText: {
-    color: colors.textPrimary,
-    fontWeight: 'bold',
+    color: '#000',
+    fontSize: 14,
+    fontWeight: '500',
   },
   link: {
+    marginTop: 16,
     color: colors.textPrimary,
-    marginTop: 12,
+    fontSize: 12,
+    opacity: 0.9,
   },
 });
