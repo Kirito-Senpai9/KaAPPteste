@@ -7,16 +7,17 @@ interface Props {
   onPress?: () => void;
 }
 
-const avatar = require('../assets/newspaper.png');
 const postImage = require('../assets/bell.png');
 
 export function PostCard({ onPress }: Props) {
+  // Controle de animações do botão de curtida
   const [liked, setLiked] = React.useState(false);
   const likeScale = React.useRef(new Animated.Value(1)).current;
   const likeColor = React.useRef(new Animated.Value(0)).current;
 
   const AnimatedIcon = Animated.createAnimatedComponent(Ionicons);
 
+  // Animação para curtir/descurtir o post
   const handleLike = () => {
     const toValue = liked ? 0 : 1;
     setLiked(!liked);
@@ -46,6 +47,7 @@ export function PostCard({ onPress }: Props) {
   const shareScale = React.useRef(new Animated.Value(1)).current;
   const eyeScale = React.useRef(new Animated.Value(1)).current;
 
+  // Animação simples para o botão de compartilhar
   const handleShare = () => {
     Animated.sequence([
       Animated.spring(shareScale, { toValue: 1.2, useNativeDriver: true }),
@@ -53,6 +55,7 @@ export function PostCard({ onPress }: Props) {
     ]).start();
   };
 
+  // Animação simples para o botão de visualizações
   const handleView = () => {
     Animated.sequence([
       Animated.spring(eyeScale, { toValue: 1.2, useNativeDriver: true }),
@@ -61,9 +64,11 @@ export function PostCard({ onPress }: Props) {
   };
 
   return (
+    // Cartão de postagem completo
     <TouchableOpacity onPress={onPress} style={styles.card}>
       <View style={styles.header}>
-        <Image source={avatar} style={styles.avatar} />
+        {/* Ícone de perfil do autor da postagem */}
+        <Ionicons name="person-circle" size={40} color={colors.accent} />
         <Text style={styles.name}>Eduardo Kaic</Text>
       </View>
       <Image source={postImage} style={styles.image} />
@@ -100,17 +105,17 @@ const styles = StyleSheet.create({
     borderRadius: radius.card,
     marginVertical: 12,
     overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 3,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: spacing.padding,
     gap: 10,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
   },
   name: {
     color: colors.textPrimary,

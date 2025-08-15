@@ -3,9 +3,11 @@ import { View, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-nativ
 import { PostCard } from '../components/PostCard';
 import { colors } from '../styles';
 
+// Dados fictícios para as bolhas de stories
 const stories = Array.from({ length: 10 }).map((_, i) => ({ id: `${i}`, seen: i % 3 === 0 }));
 
 export function FeedScreen({ navigation }: any) {
+  // Renderiza cada bolha de story
   const renderStory = ({ item }: any) => (
     <TouchableOpacity>
       <View style={[styles.storyItem, !item.seen && styles.unseen]}>
@@ -17,10 +19,12 @@ export function FeedScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <FlatList
+        // Lista principal de posts
         data={[1, 2, 3]}
         keyExtractor={(item) => item.toString()}
         renderItem={() => <PostCard onPress={() => navigation.navigate('Comments')} />}
         ListHeaderComponent={
+          // Carrossel de stories
           <FlatList
             data={stories}
             keyExtractor={(item) => item.id}
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   unseen: {
-    borderColor: '#39FF14',
+    borderColor: colors.accent,
   },
   storyImage: {
     width: 56,

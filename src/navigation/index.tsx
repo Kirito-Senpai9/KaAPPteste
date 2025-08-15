@@ -38,19 +38,28 @@ const AnimatedIcon = ({ name, color, size, focused }: { name: any; color: string
 function AppTabs() {
   return (
     <Tab.Navigator
+      // Estilos globais para a barra de navegação inferior
       screenOptions={({ route }) => ({
         headerShown: false,
         animation: 'fade',
         tabBarStyle: {
-          backgroundColor: '#111111',
+          position: 'absolute',
+          backgroundColor: colors.card,
           borderTopLeftRadius: 24,
           borderTopRightRadius: 24,
+          borderTopWidth: 0,
           height: 64,
           paddingBottom: 10,
+          shadowColor: '#000',
+          shadowOpacity: 0.15,
+          shadowOffset: { width: 0, height: -3 },
+          shadowRadius: 6,
+          elevation: 8,
         },
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: 'rgba(255,255,255,0.7)',
         tabBarIcon: ({ color, size, focused }) => {
+          // Ícones dinâmicos de acordo com a tela focada
           const icons: any = {
             Feed: focused ? 'home' : 'home-outline',
             Search: focused ? 'search' : 'search-outline',
