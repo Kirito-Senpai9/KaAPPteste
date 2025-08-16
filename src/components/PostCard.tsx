@@ -100,10 +100,10 @@ export function PostCard({ onPress }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#363636',
+    backgroundColor: colors.card,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: '#1e1b1b',
+    borderColor: colors.dark,
     marginVertical: 12,
     overflow: 'hidden',
   },
