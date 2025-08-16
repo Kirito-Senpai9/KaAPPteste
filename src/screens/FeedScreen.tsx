@@ -1,18 +1,27 @@
 import React from 'react';
 import { View, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { PostCard } from '../components/PostCard';
-import { colors } from '../styles';
 
 // Dados fictícios para as bolhas de stories
-const stories = Array.from({ length: 10 }).map((_, i) => ({ id: `${i}`, seen: i % 3 === 0 }));
+const stories = Array.from({ length: 5 }).map((_, i) => ({ id: `${i}` }));
 
 export function FeedScreen({ navigation }: any) {
   // Renderiza cada bolha de story
-  const renderStory = ({ item }: any) => (
-    <TouchableOpacity>
-      <View style={[styles.storyItem, !item.seen && styles.unseen]}>
-        <Image source={require('../assets/newspaper.png')} style={styles.storyImage} />
-      </View>
+  const renderStory = ({ item, index }: any) => (
+    <TouchableOpacity style={styles.storyWrapper}>
+      <Image
+        source={require('../assets/newspaper.png')}
+        style={[
+          styles.storyItem,
+          { borderColor: index < 4 ? '#2DFD30' : 'rgba(255,255,255,0.36)' },
+        ]}
+      />
+      {index === 4 && (
+        <Image
+          source={require('../assets/bell.png')}
+          style={styles.storyAvatar}
+        />
+      )}
     </TouchableOpacity>
   );
 
@@ -43,29 +52,27 @@ export function FeedScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
-    paddingHorizontal: 0,
+    backgroundColor: '#363636',
   },
   stories: {
     paddingVertical: 16,
-    paddingHorizontal: 8,
+    paddingHorizontal: 24,
+  },
+  storyWrapper: {
+    marginRight: 16,
   },
   storyItem: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 12,
+    width: 59,
+    height: 89,
+    borderRadius: 15,
     borderWidth: 2,
-    borderColor: 'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  unseen: {
-    borderColor: colors.accent,
-  },
-  storyImage: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+  storyAvatar: {
+    position: 'absolute',
+    top: -8,
+    right: -8,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
   },
 });
