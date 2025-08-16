@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, radius, spacing } from '../styles';
+import { colors } from '../styles';
 
 interface Props {
   onPress?: () => void;
 }
 
 const postImage = require('../assets/bell.png');
+const profileImage = require('../assets/newspaper.png');
 
 export function PostCard({ onPress }: Props) {
   // Controle de animações do botão de curtida
@@ -67,8 +68,7 @@ export function PostCard({ onPress }: Props) {
     // Cartão de postagem completo
     <TouchableOpacity onPress={onPress} style={styles.card}>
       <View style={styles.header}>
-        {/* Ícone de perfil do autor da postagem */}
-        <Ionicons name="person-circle" size={40} color={colors.accent} />
+        <Image source={profileImage} style={styles.avatar} />
         <Text style={styles.name}>Eduardo Kaic</Text>
       </View>
       <Image source={postImage} style={styles.image} />
@@ -76,21 +76,20 @@ export function PostCard({ onPress }: Props) {
         <TouchableOpacity style={styles.actionGroup} onPress={handleLike}>
           <AnimatedIcon
             name={liked ? 'heart' : 'heart-outline'}
-            size={22}
+            size={20}
             color={colorInterpolation}
             style={{ transform: [{ scale: likeScale }] }}
           />
           <Text style={styles.count}>168K</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionGroup} onPress={handleShare}>
+        <TouchableOpacity onPress={handleShare}>
           <Animated.View style={{ transform: [{ scale: shareScale }] }}>
-            <Ionicons name="share-social-outline" size={22} color={colors.textPrimary} />
+            <Ionicons name="share-social-outline" size={20} color={colors.textPrimary} />
           </Animated.View>
-          <Text style={styles.count}>168K</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionGroup} onPress={handleView}>
           <Animated.View style={{ transform: [{ scale: eyeScale }] }}>
-            <Ionicons name="eye-outline" size={22} color={colors.textPrimary} />
+            <Ionicons name="eye-outline" size={20} color={colors.textPrimary} />
           </Animated.View>
           <Text style={styles.count}>136K</Text>
         </TouchableOpacity>
@@ -101,34 +100,42 @@ export function PostCard({ onPress }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.card,
-    borderRadius: radius.card,
+    backgroundColor: '#363636',
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: '#1e1b1b',
     marginVertical: 12,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    elevation: 3,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: spacing.padding,
-    gap: 10,
+    paddingHorizontal: 16,
+    paddingTop: 18,
+    gap: 20,
+  },
+  avatar: {
+    width: 59,
+    height: 59,
+    borderRadius: 30,
   },
   name: {
     color: colors.textPrimary,
-    fontSize: 16,
+    fontSize: 20,
   },
   image: {
     width: '100%',
-    height: 200,
+    height: 231,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
   },
   actions: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     paddingVertical: 12,
+    paddingHorizontal: 16,
+    gap: 24,
   },
   actionGroup: {
     flexDirection: 'row',
@@ -137,5 +144,6 @@ const styles = StyleSheet.create({
   },
   count: {
     color: colors.textPrimary,
+    fontSize: 12,
   },
 });
